@@ -6,19 +6,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="/main.css" rel="stylesheet">
+    <link href=”/main.css” rel=”stylesheet”>
 </head>
 <body>
 
-    <div th:replace="~{nav.html :: navbar}"></div>
-
-<div class="card" th:each="i : ${items}">
-    <img src="https://placehold.co/300">
-    <div>
-        <h4 th:text="${i.title}">바지</h4>
-        <p>7억</p>
-    </div>
-</div>
+<form action="/add" method="POST">
+    <input name="title">
+    <input name="price">
+    <button type="button">버튼</button>
+</form>
 
 </body>
 </html>
