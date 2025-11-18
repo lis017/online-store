@@ -6,16 +6,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="/main.css" rel="stylesheet">
+    <link href ="/main.css" rel="stylesheet">
 </head>
 <body>
 
     <div th:replace="~{nav.html :: navbar}"></div>
 
-<form action="/add" method="POST">
-    <input name="title">
-    <input name="price">
-    <button type="button">버튼</button>
+<form action="/edit" method="POST">
+    <input name="id" th:value="${data.id}">
+    <input name="title" th:value="${data.title}">
+    <input name="price" th:value="${data.price}">
+    <button type="submit">전송</button>
 </form>
 
 </body>

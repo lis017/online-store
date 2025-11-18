@@ -1,0 +1,60 @@
+package com.lis.shop.Item;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@Controller     //페이지 이동위주
+@RequiredArgsConstructor
+public class ItemController {
+    private final ItemRepository itemRepository;    //이 변수로 db입출력함수들 사용가능
+    private final ItemService itemService;
+    @GetMapping("/list")    //list페이지 보여줌
+    String list(Model model) {
+        List<Item> result = itemRepository.findAll();   //list에 굳이 담는 이유는, 이래야 정상적으로 보인다. 안하면 암호처럼 나옵니다.
+        model.addAttribute("items", result);
+        return "list.html";
+    }
+
+    @GetMapping("/write")   //고객이 db에 저장가능한 페이지 보여줌
+    String write() {
+        return "write.html";
+    }
+    @PostMapping("/add")    //고객정보 db저장
+    String writePost(String title, Integer price) {
+        itemService.saveItem(title, price);
+        return "redirect:/list";
+    }
+    @GetMapping("/detail/{id}")
+    String detail(@PathVariable Long id, Model model) {
+
+        Optional<Item> result = itemRepository.findById(id);
+        if (result.isPresent()){
+            model.addAttribute("data", result.get());
+            return "detail.html";
+        } else {
+            return "redirect:/list";
+        }
+    }
+    @GetMapping("/edit/{id}")   //상품정보 수정페이지
+    String edit(@PathVariable Long id, Model model) {
+        Optional<Item> result = itemRepository.findById(id);
+        if (result.isPresent()) {
+            model.addAttribute("data", result.get());
+            return "edit.html";
+        } else {
+            return "redirect:/list";
+        }
+    }
+    @PostMapping("/edit")
+    String editItem(String title, Integer price, Long id) {     //post로 받은 상품정보 수정
+        itemService.editItem(title, price, id);
+        return "redirect:/list";
+    }
+
+
+}

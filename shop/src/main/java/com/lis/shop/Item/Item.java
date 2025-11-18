@@ -1,4 +1,4 @@
-package com.lis.shop;
+package com.lis.shop.Item;
 
 import jakarta.persistence.*;
 import lombok.Getter;

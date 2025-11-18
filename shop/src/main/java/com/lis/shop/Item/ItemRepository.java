@@ -1,4 +1,4 @@
-package com.lis.shop;
+package com.lis.shop.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 //인터페이스를 가져왔기에, 안보여도 db관련입출력 함수들이 많이 있는 상태임. 그거 쓰면됩니다.
