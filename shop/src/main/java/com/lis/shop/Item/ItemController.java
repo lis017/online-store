@@ -1,6 +1,7 @@
 package com.lis.shop.Item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +56,10 @@ public class ItemController {
         itemService.editItem(title, price, id);
         return "redirect:/list";
     }
-
+    @DeleteMapping("/item") //고객의 데이터삭제 api
+    ResponseEntity<String> deleteItem(@RequestParam Long id) {
+        itemRepository.deleteById(id);
+        return ResponseEntity.status(200).body("삭제완료");     //ajax면 html이나 rediret불가능해서, 메시지전달
+    }
 
 }
