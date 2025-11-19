@@ -2,6 +2,7 @@ package com.lis.shop.Item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +62,6 @@ public class ItemController {
         itemRepository.deleteById(id);
         return ResponseEntity.status(200).body("삭제완료");     //ajax면 html이나 rediret불가능해서, 메시지전달
     }
+
 
 }
