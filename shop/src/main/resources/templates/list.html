@@ -19,10 +19,10 @@
         <a th:href="@{'/detail/' + ${i.id} }">링크</a>
         <p th:text="${i.price + '원'}">7억</p>
         <a th:href="@{ '/edit/' + ${i.id} }">✏️</a>
-        <!-- ajax로 데이터 삭제후 새로고침-->
+        <!-- ajax로 데이터 삭제 성공 후 화면에서 해당 상품 줄 숨기기-->
         <span th:onclick="fetch('/item?id=[[${i.id}]]', { method : 'DELETE' } )
           .then(r => r.text())
-          .then(result => { window.location.reload() })
+          .then(result => { e.parentElement.parentElement.style.display = 'none' })
         ">🗑️</span>
     </div>
 </div>
