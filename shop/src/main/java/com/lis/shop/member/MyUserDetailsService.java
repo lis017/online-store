@@ -22,8 +22,7 @@
 //
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {   //비번검사
-//        //DB에서 username을 가진 유저를 찾아와서
-//        return new User(유저아이디, 비번, 권한) 해주세요
+//        return new User(id, password, )
 //    }
 //
 //}
