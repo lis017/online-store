@@ -49,3 +49,7 @@ input {
   display : block;
   margin : auto;
 }
+
+.delete-btn {
+  cursor: pointer;
+}
