@@ -24,6 +24,6 @@ public class Item {
     private String title;
     private Integer price;  //int는 JPA에서 불가
     private String username;
-
+    private String imgURL;
 
 }

@@ -9,13 +9,14 @@ public class ItemService {  //데이터 전송전에 작업하는곳(service)
     private final ItemRepository itemRepository;
 
     //상품 저장
-    public void saveItem(String title, Integer price){
+    public void saveItem(String title, Integer price, String imgURL){
         if (price < 0) {
             throw new RuntimeException("음수 안됩니다");      //가격이 음수일때 예외처리
         }
         Item item = new Item();
         item.setTitle(title);   //private니깐 세터함수 이용.
         item.setPrice(price);
+        item.setImgURL(imgURL);
         itemRepository.save(item);
     }
 

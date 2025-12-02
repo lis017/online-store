@@ -18,6 +18,7 @@ import java.util.Optional;
 public class ItemController {
     private final ItemRepository itemRepository;    //이 변수로 db입출력함수들 사용가능
     private final ItemService itemService;
+    private final S3Service s3Service;
     @GetMapping("/list")    //list페이지 보여줌
     String list(Model model) {
         List<Item> result = itemRepository.findAll();   //list에 굳이 담는 이유는, 이래야 정상적으로 보인다. 안하면 암호처럼 나옵니다.
@@ -37,8 +38,8 @@ public class ItemController {
         return "write.html";
     }
     @PostMapping("/add")    //상품정보 db저장
-    String writePost(String title, Integer price) {
-        itemService.saveItem(title, price);
+    String writePost(String title, Integer price, String imgURL) {
+        itemService.saveItem(title, price, imgURL);
         return "redirect:/list";
     }
     @GetMapping("/detail/{id}")
@@ -72,6 +73,11 @@ public class ItemController {
         itemRepository.deleteById(id);
         return ResponseEntity.status(200).body("삭제완료");     //ajax면 html이나 rediret불가능해서, 메시지전달
     }
-
-
+    //prisignedURL를 write.html에 반환
+    @GetMapping("/presigned-url")
+    @ResponseBody
+    String getURL(@RequestParam String filename){
+        var result = s3Service.createPresignedUrl("test/" + filename);
+        return result;
+    }
 }
