@@ -1,0 +1,17 @@
+<div class="nav" th:fragment="navbar">
+    <a class="logo">SpringMall</a>
+    <a>List</a>
+    <a>Write</a>
+
+    <!-- 로그인 상태일 때 -->
+    <div sec:authorize="isAuthenticated()">
+        <span sec:authentication="principal.username"></span>       <!--로그인 상태에만 값 들어가서, 로그아웃이어도 오류안남.-->
+        <a href="/logout">로그아웃</a>
+    </div>
+
+    <!-- 로그아웃 상태일 때 -->
+    <span sec:authorize="isAnonymous()">
+        <a href="/login">로그인</a>
+        <a href="/register">회원가입</a>
+    </span>
+</div>

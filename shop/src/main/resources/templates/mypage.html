@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="~{nav.html :: navbar}"></div>
+
+<h4>마이페이지</h4>
+
+<span sec:authentication="principal"></span>    <br>            <!--고객 정보출력-->
+<span sec:authentication="principal.username"></span> <br>
+<span sec:authentication="principal.authorities"></span> <br>
+<span sec:authorize="hasAuthority('regular')">일반권한이 있으면 보여드려요</span> <br>
+<div sec:authorize="isAuthenticated()">
+    로그인된 사람만 보여드려요
+</div>
+
+</body>
+</html>
