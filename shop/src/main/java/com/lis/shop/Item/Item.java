@@ -13,6 +13,7 @@ import lombok.ToString;
 //이런거 쓰는 이유는, 로직에 추가 보안요소를 추가할수있어서 이다.(변수 API느낌) (이런거 추가하려면 따로 정의하긴 해야함)
 @Getter     //변수가 private일때, 이걸 다른곳에서 출력가능케하는 함수. 를 쓸수있게해줌.
 @Setter     //변수가 private일때, 이걸 다른곳에서 수정가능케하는 함수. 를 쓸수있게해줌.
+@Table(indexes = @Index(columnList = "title", name = "작명"))
 public class Item {
     //여기 변수는 컬럼 만드는거(테이블내의 옵션이름같은)
 

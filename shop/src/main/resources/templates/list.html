@@ -12,22 +12,31 @@
 
     <div th:replace="~{nav.html :: navbar}"></div>
 
-<div class="card" th:each="i : ${items}">
-    <img th:if="${i.imgURL}" th:src="${i.imgURL}" alt="상품 이미지" width="300">
-    <div>
-        <h4 th:text="${i.title}">상품명</h4>
-        <a th:href="@{'/detail/' + ${i.id} }">링크</a>
-        <p th:text="${i.price + '원'}">얼마</p>
-        <a th:href="@{ '/edit/' + ${i.id} }">✏️</a>
-        <!-- ajax로 데이터 삭제 성공 후 화면에서 해당 상품 줄 숨기기-->
-        <span class="delete-btn"
-              th:onclick="fetch('/item?id=[[${i.id}]]', { method : 'DELETE' })
-              .then(r => r.text())
-              .then(result => { this.parentElement.parentElement.style.display = 'none' })">
-          🗑️
-        </span>
+    <form action="/search" method="POST">
+        <!--CSRF토큰-->
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+        <input name="searchText" style="display:inline">
+        <button type="submit">검색</button>
+    </form>
+
+    <div class="card" th:each="i : ${items}">
+        <img th:if="${i.imgURL}" th:src="${i.imgURL}" alt="상품 이미지" width="300">
+        <div>
+            <h4 th:text="${i.title}">상품명</h4>
+            <a th:href="@{'/detail/' + ${i.id} }">링크</a>
+            <p th:text="${i.price + '원'}">얼마</p>
+            <a th:href="@{ '/edit/' + ${i.id} }">✏️</a>
+            <!-- ajax로 데이터 삭제 성공 후 화면에서 해당 상품 줄 숨기기-->
+            <span class="delete-btn"
+                  th:onclick="fetch('/item?id=[[${i.id}]]', { method : 'DELETE' })
+                  .then(r => r.text())
+                  .then(result => { this.parentElement.parentElement.style.display = 'none' })">
+              🗑️
+            </span>
+        </div>
     </div>
-</div>
 
 </body>
 </html>
